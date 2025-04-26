@@ -16,13 +16,17 @@ class DatabaseMiddleware(BaseMiddleware):
         event: Message,
         data: Dict[str, Any]
     ) -> Any:
-        # create db context if it not created
-        if not self._context:
-            config: Configuration = data["config"]
-            self._context = await DatabaseContext.create(config.get_db_connection_string(),
-                                                         True)
         data['context'] = self._context
         return await handler(event, data)
+    
+    async def create_context(self, connection_string: str) -> None:
+        # create db context if it not created
+        if not self._context:
+            config: Configuration = connection_string
+            self._context = await DatabaseContext.create(connection_string, True)
+
+    def get_context(self) -> DatabaseContext | None:
+        return self._context
     
     async def dispose(self) -> None:
         if self._context:

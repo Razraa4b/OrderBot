@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 ## Usage
 > [!WARNING]
-> You need to find the *.env configuration file in the root folder of the project for the bot to find the *.env configuration file.
+> Run from the folder containing the .env file. Otherwise, an error will occur
 Now that we are fully prepared, we can launch the bot using the command:
 ```
 python src/main.py

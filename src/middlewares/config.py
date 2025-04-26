@@ -17,3 +17,6 @@ class ConfigurationMiddleware(BaseMiddleware):
     ) -> Any:
         data['config'] = self._config
         return await handler(event, data)
+    
+    def get_config(self) -> Configuration:
+        return self._config
