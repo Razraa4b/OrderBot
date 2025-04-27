@@ -6,3 +6,9 @@ class Order:
         self.title = title
         self.link = link
         self.publish_time = publish_time
+
+    def __eq__(self, obj) -> bool:
+        if isinstance(obj, Order):
+            return self.link == obj.link
+        else:
+            return False
