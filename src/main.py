@@ -1,5 +1,4 @@
 import logging
-from sys import stdout
 
 import asyncio
 from aiogram import Bot, Dispatcher
@@ -16,7 +15,7 @@ from handlers.user import start, commands
 
 
 async def main() -> None:
-    logging.basicConfig(level=logging.DEBUG, stream=stdout)
+    logging.basicConfig(level=logging.DEBUG, filename="out.log")
 
     config = Configuration()
     bot = Bot(token=config.get_token())

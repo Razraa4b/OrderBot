@@ -47,7 +47,7 @@ async def start_mailing(bot: Bot, context: DatabaseContext | None, redis: Redis)
     for order in orders:
         # check the difference in the time of publication, if it is out of date, do not put on new orders
         diff = relativedelta(now, order.publish_time)
-        if (diff.minutes < 15 and
+        if (diff.minutes < 30 and
             diff.hours == 0 and
             diff.days == 0 and
             diff.months == 0 and
