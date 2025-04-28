@@ -18,12 +18,14 @@ class FreelanceruParser(Parser[List[Order]]):
                 projects = soup.select('div.project:not(.highlight)')
                 orders = []
                 for project in projects:
-                    title = project.select("h2.title")[0]
-                    link = "https://freelance.ru" + str(title.find("a")["href"])
-                    publish_time = str(project.select("div.publish-time")[0]["title"])
-
-                    order = Order(title.getText(), link, self.parse_datetime(publish_time))
-                    orders.append(order)
+                    try:
+                        title = project.select("h2.title")[0]
+                        link = "https://freelance.ru" + str(title.find("a")["href"])
+                        publish_time = str(project.select("div.publish-time")[0]["title"])
+                        order = Order(title.getText(), link, self.parse_datetime(publish_time))
+                        orders.append(order)
+                    except IndexError:
+                        continue
                 return orders
     
     def parse_datetime(self, s: str) -> datetime | None:

@@ -11,7 +11,7 @@ from services.config import Configuration
 from services.mailing import start_mailing
 from middlewares import ConfigurationMiddleware, DatabaseMiddleware
 
-from handlers.user import start, commands
+from handlers.user import start, commands, errors
 
 
 async def main() -> None:
@@ -37,6 +37,7 @@ async def main() -> None:
 
     dp.include_router(start.router)
     dp.include_router(commands.router)
+    dp.include_router(errors.router)
 
     try:
         await dp.start_polling(bot)
